@@ -1,29 +1,10 @@
-import React, { useState, useEffect } from 'react'
-import './App.css'
+import React from 'react';
+import './App.css';
+// import hook
+import useOnlineStatus from './useOnlineStatus';
 
 function App() {
-
-  const [isOnline, setIsOnline] = useState(navigator.onLine);
-
-  useEffect(() => {
-    const handleOnline = () => {
-      setIsOnline(true);
-      // Internet connection re-established logic here
-    };
-
-    const handleOffline = () => {
-      setIsOnline(false);
-      // Internet connection lost logic here
-    };
-
-    window.addEventListener('online', handleOnline);
-    window.addEventListener('offline', handleOffline);
-
-    return () => {
-      window.removeEventListener('online', handleOnline);
-      window.removeEventListener('offline', handleOffline);
-    };
-  }, []);
+  const isOnline = useOnlineStatus();
 
   return (
     <React.Fragment>
@@ -34,7 +15,7 @@ function App() {
       )}
       <div className="card"></div>
     </React.Fragment>
-  )
+  );
 }
 
-export default App
+export default App;
